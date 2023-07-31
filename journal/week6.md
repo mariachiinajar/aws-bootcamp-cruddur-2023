@@ -2,7 +2,7 @@
 
 ![One of Week 6 challenges](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mSbyeNDvvtrFa3PriCWw9Q.png)
 
-## Weekly Stats
+## Weekly Stats 📊
 - Github: [16 commits through May 21 - June 2](https://github.com/CloudWest2023/aws-bootcamp-cruddur-2023/compare/main...mariachiinajar:aws-bootcamp-cruddur-2023:submissions)
 - Medium: [10 technical documentation articles](https://medium.com/@gwenleigh/week-6-ecs-fargate-f2caafd8c02c)
 - Discord: Weeks 6 & 7 combined, contributed 8 questions total, 5 of them resolved, helped +1 questions
