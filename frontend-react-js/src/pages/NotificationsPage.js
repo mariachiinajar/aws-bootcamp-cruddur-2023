@@ -6,10 +6,7 @@ import DesktopSidebar     from '../components/DesktopSidebar';
 import ActivityFeed from '../components/ActivityFeed';
 import ActivityForm from '../components/ActivityForm';
 import ReplyForm from '../components/ReplyForm';
-import checkAuth from '../lib/checkAuth';
-
-// [TODO] Authenication
-import Cookies from 'js-cookie'
+import { checkAuth, getAccessToken } from '../lib/checkAuth';
 
 export default function NotificationsPage() {
   const [activities, setActivities] = React.useState([]);
@@ -22,7 +19,12 @@ export default function NotificationsPage() {
   const loadData = async () => {
     try {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/notifications`
+      await getAccessToken()
+      const access_token = localStorage.getItem("access_token")
       const res = await fetch(backend_url, {
+        headers: {
+          Authorization: `Bearer ${access_token}`
+        },
         method: "GET"
       });
       let resJson = await res.json();
@@ -42,12 +44,12 @@ export default function NotificationsPage() {
     dataFetchedRef.current = true;
 
     loadData();
-    checkAuth();
+    checkAuth(setUser);
   }, [])
 
   return (
     <article>
-      <DesktopNavigation user={user} active={'notificationssss'} setPopped={setPopped} />
+      <DesktopNavigation user={user} active={'notifications'} setPopped={setPopped} />
       <div className='content'>
         <ActivityForm  
           popped={popped}
