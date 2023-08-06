@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+cd /workspace/aws-bootcamp-cruddur-2023/
+sudo ./aws/install
+npm i aws-cdk -g
+cd /workspace/aws-bootcamp-cruddur-2023/serverless-cd
+
+npm install
+rm -rf node_modules/sharp
+SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux --libc=glibc sharp

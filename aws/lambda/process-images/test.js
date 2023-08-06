@@ -2,10 +2,10 @@ const {getClient, getOriginalImage, processImage, uploadProcessedImage} = requir
 
 async function main(){
   client = getClient()
-  const srcBucket = process.env.ASSETS_S3_FOLDER_INPUT
-  const srcKey = 'avatar/original/data.jpg'
-  const dstBucket = process.env.ASSETS_S3_FOLDER_OUTPUT
-  const dstKey = 'avatar/processed/data.png'
+  const srcBucket = process.env.AWS_S3_FOLDER_AVATARS_INPUT
+  const srcKey = '/exam tasing.png'
+  const dstBucket = process.env.AWS_S3_FOLDER_AVATARS_OUTPUT
+  const dstKey = '/exam tasing.png'
   const width = 256
   const height = 256
 
