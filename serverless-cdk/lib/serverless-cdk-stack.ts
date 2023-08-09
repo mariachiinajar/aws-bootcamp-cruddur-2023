@@ -1,18 +1,18 @@
 import * as cdk from 'aws-cdk-lib';
-import * as iam from 'aws-cdk-lib/aws-iam';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as s3n from 'aws-cdk-lib/aws-s3-notifications';
-import * as sns from 'aws-cdk-lib/aws-sns';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
+import * as sns from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import * as dotenv from 'dotenv';
 
-// load env variables
-// const dotenv = require('dotenv')
+// Load env variables
+// const dotenv = require('dotenv');
 dotenv.config();
 
-export class ServerlessCdkStack extends cdk.Stack {
+export class ThumbingServerlessCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -48,8 +48,8 @@ export class ServerlessCdkStack extends cdk.Stack {
     const snsTopic = this.createSnsTopic(topicName);
     this.createSnsSubscription(snsTopic, webhookUrl);
     // We don't need to attach the policy to Lambda because it is not Lambda that pushes to SNS. 
+
     // const snsPublishPolicy = this.createPolicySnSPublish(snsTopic.topicArn)
-    // lambda.addToRolePolicy(snsPublishPolicy);
 
     // add trigger and destination
     // Send notifications to SNS and Lambda
@@ -143,13 +143,17 @@ export class ServerlessCdkStack extends cdk.Stack {
       s3.EventType.OBJECT_CREATED_PUT, 
       destination,
       {prefix: prefix}
-    );  
+    );
   }
 
-  createPolicySnSPublish(topicArn: string) {
+  createPolicySnSPublish(topicArn: string){
     const snsPublishPolicy = new iam.PolicyStatement({
-      actions: [ 'sns:Publish', ],
-      resources: [ topicArn ]
+      actions: [
+        'sns:Publish',
+      ],
+      resources: [
+        topicArn
+      ]
     });
     return snsPublishPolicy;
   }
