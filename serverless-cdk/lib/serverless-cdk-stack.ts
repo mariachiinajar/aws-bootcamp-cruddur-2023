@@ -16,10 +16,6 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-    const dotenv = require('dotenv');
-    dotenv.config();
-
     const uploadsBucketName  : string = process.env.AWS_S3_BUCKET_UPLOADS as string;
     const processedBucketName: string = process.env.AWS_S3_BUCKET_PROCESSED as string;
     const folderInput : string = process.env.AWS_S3_FOLDER_AVATARS_INPUT as string;
@@ -103,15 +99,14 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     return lambdaFunction;
   }
 
-    createS3NotifyToLambda(prefix: string, lambda: lambda.IFunction, bucket: s3.IBucket): void {
-      const destination = new s3n.LambdaDestination(lambda);
-      bucket.addEventNotification(
-        s3.EventType.OBJECT_CREATED_PUT,
-        destination//,
-        //{prefix: prefix} // Original folder image
-      )
-    }
-  
+  createS3NotifyToLambda(prefix: string, lambda: lambda.IFunction, bucket: s3.IBucket): void {
+    const destination = new s3n.LambdaDestination(lambda);
+    bucket.addEventNotification(s3.EventType.OBJECT_CREATED_PUT,
+      destination,
+      // {prefix: prefix} // folder to contain the original images
+    )
+  }
+
   createPolicyBucketAccess(bucketArn: string) {
     console.log("test: createPolicyBucketAccess ==================================")
     console.log("bucketArn: ", bucketArn)

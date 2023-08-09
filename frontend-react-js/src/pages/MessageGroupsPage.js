@@ -1,9 +1,9 @@
 import './MessageGroupsPage.css';
 import React from "react";
 
-import DesktopNavigation  from '../components/DesktopNavigation';
-import MessageGroupFeed from '../components/MessageGroupFeed';
-import { checkAuth, getAccessToken } from '../lib/checkAuth';
+import DesktopNavigation  from 'components/DesktopNavigation';
+import MessageGroupFeed from 'components/MessageGroupFeed';
+import { checkAuth, getAccessToken } from 'lib/checkAuth';
 
 export default function MessageGroupsPage() {
   const [messageGroups, setMessageGroups] = React.useState([]);
@@ -45,7 +45,7 @@ export default function MessageGroupsPage() {
   }, [])
   return (
     <article>
-      <DesktopNavigation user={user} active={'home'} setPopped={setPopped} />
+      <DesktopNavigation user={user} active={'messages'} setPopped={setPopped} />
       <section className='message_groups'>
         <MessageGroupFeed message_groups={messageGroups} />
       </section>
