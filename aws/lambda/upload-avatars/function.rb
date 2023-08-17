@@ -11,7 +11,7 @@ def handler(event:, context:)
     {
       headers: {
         "Access-Control-Allow-Headers": "*, Authorization", 
-        "Access-Control-Allow-Origin": "https://3000-mariachiina-awsbootcamp-f0x6sksrrgh.ws-us103.gitpod.io", 
+        "Access-Control-Allow-Origin": "https://3000-mariachiina-awsbootcamp-f0x6sksrrgh.ws-us104.gitpod.io", 
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
       },
       statusCode: 200
@@ -24,8 +24,8 @@ def handler(event:, context:)
     extension = body_hash["extension"]
 
     decoded_token = JWT.decod token, nil, false
-    puts "decoded toeken #{decoded_token.inspect}"
-    cognito_user_id = decoded_token['sub']
+    puts "decoded token #{decoded_token.inspect}"
+    cognito_user_uuid = decoded_token['sub']
 
     s3 = Aws::S3::Resource.new
     bucket_name = ENV["AWS_S3_BUCKET_UPLOADS"]
@@ -40,7 +40,7 @@ def handler(event:, context:)
     { 
       headers: {
         "Access-Control-Allow-Headers": "*, Authorization",
-        "Access-Control-Allow-Origin": "https://3000-mariachiina-awsbootcamp-f0x6sksrrgh.ws-us103.gitpod.io",
+        "Access-Control-Allow-Origin": "https://3000-mariachiina-awsbootcamp-f0x6sksrrgh.ws-us104.gitpod.io/",
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
       },
       statusCode: 200, 

@@ -6,4 +6,5 @@ class UsersShort:
         results = db.query_json_object(sql, {
             'handle': handle
         })
+        print("UsersShort handle: ", result)
         return results
